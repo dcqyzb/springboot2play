@@ -7,3 +7,5 @@
     4)https://blog.csdn.net/forezp/article/details/85210153 服务注册与发现
 3、远程调用 feigin
 4、服务和接口鉴权 JWT
+5、消息中间件使用rabbitmq,各种模式的使用
+6、新添加注册中心和配置中心统一管理的nacos
