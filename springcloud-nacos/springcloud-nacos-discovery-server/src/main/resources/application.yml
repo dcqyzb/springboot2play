@@ -1,0 +1,15 @@
+server:
+  port: 8888
+
+spring:
+  application:
+    name: springcloud-nacos-discovery-server
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.20.231:8848
+        namespace: 216011c0-eac8-473c-a889-0a30874e4822
+
+
+
+useLocalCache: true

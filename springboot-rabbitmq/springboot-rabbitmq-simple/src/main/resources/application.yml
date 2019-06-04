@@ -1,0 +1,12 @@
+server:
+  port: 8883
+
+spring:
+  application:
+    name: springboot-rabbitmq-simple
+  rabbitmq:
+    host: 192.168.20.231
+    port: 5672
+    username: dcTest
+    password: dcTest123
+    virtual-host: /dcTest

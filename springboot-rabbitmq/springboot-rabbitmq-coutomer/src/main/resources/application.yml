@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: rabbitmq-customer
+  rabbitmq:
+    host: 192.168.20.231
+    port: 5672
+    username: dcTest
+    password: dcTest123
+    virtual-host: /dcTest
+
+
+server:
+  port: 8882

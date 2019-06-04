@@ -1,0 +1,12 @@
+server:
+  port: 8889
+
+spring:
+  application:
+    name: springcloud-nacos-customer-service
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.20.231:8848
+        namespace: 216011c0-eac8-473c-a889-0a30874e4822
+
