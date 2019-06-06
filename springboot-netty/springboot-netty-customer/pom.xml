@@ -9,9 +9,9 @@
         <relativePath/>
     </parent>
     <groupId>com.example</groupId>
-    <artifactId>springboot-netty-server</artifactId>
+    <artifactId>springboot-netty-customer</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>springboot-netty-server</name>
+    <name>springboot-netty-customer</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>
@@ -23,7 +23,11 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.58</version>
+        </dependency>
         <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
@@ -34,20 +38,10 @@
             <artifactId>netty-all</artifactId>
             <version>4.0.36.Final</version>
         </dependency>
-
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>fastjson</artifactId>
-            <version>1.2.58</version>
-        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
         </dependency>
     </dependencies>
 

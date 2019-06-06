@@ -1,0 +1,11 @@
+server:
+  port: 8884
+
+
+spring:
+  application:
+    name: springboot-netty-server
+
+netty:
+  port: 7000
+  url: 192.168.20.235
