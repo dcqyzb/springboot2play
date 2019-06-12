@@ -8,19 +8,11 @@
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.example</groupId>
     <artifactId>springboot-gateway</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>springboot-gateway</name>
     <packaging>jar</packaging>
     <description>路由</description>
-
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <java.version>1.8</java.version>
-        <spring-cloud.version>Greenwich.SR1</spring-cloud.version>
-    </properties>
 
     <dependencies>
         <dependency>
@@ -32,11 +24,6 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
-
-        <!--<dependency>-->
-            <!--<groupId>org.springframework.boot</groupId>-->
-            <!--<artifactId>spring-boot-starter-actuator</artifactId>-->
-        <!--</dependency>-->
     </dependencies>
 
     <dependencyManagement>
