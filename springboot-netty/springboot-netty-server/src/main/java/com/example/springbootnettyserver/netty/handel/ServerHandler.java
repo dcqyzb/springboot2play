@@ -1,9 +1,10 @@
 package com.example.springbootnettyserver.netty.handel;
 
-import com.example.springbootnettyserver.netty.start.ServerToClientService;
+import com.example.springbootnettyserver.netty.cache.ChannelRepository;
+import io.netty.buffer.Unpooled;
+import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
-import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * @author Mr.Deng
@@ -12,8 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 public class ServerHandler extends ChannelInboundHandlerAdapter {
 
-    @Autowired
-    private ServerToClientService serverToClientService;
+    private ChannelRepository channelRepository = new ChannelRepository();
 
     @Override
     public void channelRegistered(ChannelHandlerContext ctx) throws Exception {
@@ -30,18 +30,39 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         System.out.println("channelActive--->活跃状态");
+        String socketAddress = ctx.channel().remoteAddress().toString();
+        System.out.println(socketAddress);
+        ctx.fireChannelActive();
+        //远程地址
+        channelRepository.put(socketAddress, ctx.channel());
+        ctx.writeAndFlush("Your channel key is" + socketAddress + "\n\r");
 //        super.channelActive(ctx);
     }
 
     @Override
     public void channelInactive(ChannelHandlerContext ctx) throws Exception {
         System.out.println("channelInactive ---》客户端与服务端断开连接之后");
+        String s = ctx.channel().remoteAddress().toString();
+        channelRepository.remove(s);
+        ctx.writeAndFlush("Your channel key is" + s + "remove \n\r");
 //        super.channelInactive(ctx);
+    }
+
+    @Override
+    public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+        System.out.println("server channelRead......");
+        System.out.println(ctx.channel().remoteAddress() + "----->Server :" + msg.toString());
+        String message = (String) msg;
+        System.out.println("send message :" + message);
+        ctx.writeAndFlush(message + "\n\r");
     }
 
     @Override
     public void channelReadComplete(ChannelHandlerContext ctx) throws Exception {
         System.out.println("channel读取数据完毕");
+        System.out.println("在线数：" + channelRepository.size());
+        ctx.writeAndFlush(Unpooled.EMPTY_BUFFER)
+                .addListener(ChannelFutureListener.CLOSE);
         super.channelReadComplete(ctx);
     }
 
@@ -58,23 +79,7 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
     }
 
     @Override
-    public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-//        super.channelRead(ctx, msg);
-        System.out.println("server channelRead......");
-        System.out.println(ctx.channel().remoteAddress() + "----->Server :" + msg.toString());
-        //将客户端的信息直接返回写入ctx
-        String message = (String) msg;
-        System.out.println("send message :" + message);
-        serverToClientService.lsMessage(message);
-//        ctx.write("server say :" + message);
-//        //刷新缓存区
-//        ctx.flush();
-    }
-
-    @Override
-    //channel发生异常，若不关闭，随着异常channel的逐渐增多，性能也就随之下降
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
-//        super.exceptionCaught(ctx, cause);
         System.out.println("捕获channel异常");
         super.exceptionCaught(ctx, cause);
     }
@@ -90,4 +95,5 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
         System.out.println("助手类移除");
         super.handlerRemoved(ctx);
     }
+
 }

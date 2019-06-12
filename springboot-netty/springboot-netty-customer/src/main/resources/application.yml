@@ -5,5 +5,5 @@ spring:
   application:
     name: springboot-netty-customer
 netty:
-  host: 192.168.20.235
+  host: 192.168.20.206
   port: 7000

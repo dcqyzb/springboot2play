@@ -1,6 +1,7 @@
 package com.example.springbootnettyserver.netty.handel;
 
 import io.netty.channel.ChannelInitializer;
+import io.netty.channel.ChannelPipeline;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.codec.string.StringEncoder;
@@ -15,9 +16,11 @@ public class ServerChannelInitializer extends ChannelInitializer<SocketChannel> 
 
     @Override
     protected void initChannel(SocketChannel channel) throws Exception {
+        ChannelPipeline pipeline = channel.pipeline();
+        pipeline.addLast("decoder", new StringDecoder(CharsetUtil.UTF_8));
+        pipeline.addLast("encoder", new StringEncoder(CharsetUtil.UTF_8));
+        pipeline.addLast(new ServerHandler());
 
-        channel.pipeline().addLast("decoder", new StringDecoder(CharsetUtil.UTF_8));
-        channel.pipeline().addLast("encoder", new StringEncoder(CharsetUtil.UTF_8));
-        channel.pipeline().addLast(new ServerHandler());
+        System.out.println("SimpleChatClient:" + channel.remoteAddress() + "连接上");
     }
 }
