@@ -22,7 +22,7 @@ public class NettyCustomerController {
     public void clientSend(@PathVariable String message) {
         JSONObject ss = new JSONObject();
         ss.put("did", 123456);
-        clientServer.sendMessage(message);
+//        clientServer.sendMessage(message);
     }
 
 }

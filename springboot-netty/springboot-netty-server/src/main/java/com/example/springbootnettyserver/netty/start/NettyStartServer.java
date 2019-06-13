@@ -32,10 +32,10 @@ public class NettyStartServer {
                     .localAddress(address)
                     .childHandler(new ServerChannelInitializer())
                     .option(ChannelOption.SO_BACKLOG, 128)
+                    //保持长连接
                     .childOption(ChannelOption.SO_KEEPALIVE, true);
             //绑定端口，开始接收进来的连接
             ChannelFuture future = bootstrap.bind(address).sync();
-            LOGGER.info("server start listen at " + address.getPort());
             System.out.println("server start listen at " + address.getPort());
             future.channel().closeFuture().sync();
         } catch (InterruptedException e) {

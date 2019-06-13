@@ -1,8 +1,6 @@
 package com.example.springbootnettyserver.netty.handel;
 
 import com.example.springbootnettyserver.netty.cache.ChannelRepository;
-import io.netty.buffer.Unpooled;
-import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 
@@ -61,8 +59,8 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
     public void channelReadComplete(ChannelHandlerContext ctx) throws Exception {
         System.out.println("channel读取数据完毕");
         System.out.println("在线数：" + channelRepository.size());
-        ctx.writeAndFlush(Unpooled.EMPTY_BUFFER)
-                .addListener(ChannelFutureListener.CLOSE);
+//        ctx.writeAndFlush(Unpooled.EMPTY_BUFFER)
+//                .addListener(ChannelFutureListener.CLOSE);
         super.channelReadComplete(ctx);
     }
 

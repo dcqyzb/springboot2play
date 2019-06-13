@@ -4,6 +4,10 @@ server:
 spring:
   application:
     name: springboot-netty-customer
+
+
 netty:
   host: 192.168.20.206
   port: 7000
+channel:
+  id: 123456

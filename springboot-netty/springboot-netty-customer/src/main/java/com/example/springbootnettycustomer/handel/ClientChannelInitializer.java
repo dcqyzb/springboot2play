@@ -1,9 +1,11 @@
 package com.example.springbootnettycustomer.handel;
 
 import io.netty.channel.ChannelInitializer;
+import io.netty.channel.ChannelPipeline;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.codec.string.StringEncoder;
+import io.netty.handler.timeout.IdleStateHandler;
 import io.netty.util.CharsetUtil;
 
 /**
@@ -15,8 +17,12 @@ public class ClientChannelInitializer extends ChannelInitializer<SocketChannel> 
 
     @Override
     protected void initChannel(SocketChannel channel) throws Exception {
-        channel.pipeline().addLast("decoder", new StringDecoder(CharsetUtil.UTF_8));
-        channel.pipeline().addLast("encoder", new StringEncoder(CharsetUtil.UTF_8));
-        channel.pipeline().addLast(new ClientHandler());
+        ChannelPipeline pipeline = channel.pipeline();
+        pipeline.addLast("decoder", new StringDecoder(CharsetUtil.UTF_8));
+        pipeline.addLast("encoder", new StringEncoder(CharsetUtil.UTF_8));
+        //10 秒没发送消息 将IdleStateHandler 添加到 ChannelPipeline 中
+        pipeline.addLast(new IdleStateHandler(0, 10, 0));
+        pipeline.addLast(new EchoClientHandle());
+        pipeline.addLast(new ClientHandler());
     }
 }

@@ -19,6 +19,7 @@ import java.util.HashMap;
 public class ImChatServerHandler extends SimpleChannelInboundHandler<String> {
 
     public static ChannelGroup channels = new DefaultChannelGroup(GlobalEventExecutor.INSTANCE);
+//    private static final ByteBuf HEART_BEAT =  Unpooled.unreleasableBuffer(Unpooled.copiedBuffer(new CustomProtocol(123456L,"pong").toString(), CharsetUtil.UTF_8));
 
 //    //用于存储设备和channel的绑定关系
 //    private Map<String, Channel> deviceAndChannel= new HashMap<String, Channel>();
