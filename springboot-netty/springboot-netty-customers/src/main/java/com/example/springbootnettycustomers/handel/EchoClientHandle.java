@@ -1,4 +1,4 @@
-package com.example.springbootnettycustomer.handel;
+package com.example.springbootnettycustomers.handel;
 
 import com.example.Protocol.CustomProtocol;
 import io.netty.buffer.ByteBuf;
@@ -19,7 +19,7 @@ import org.slf4j.LoggerFactory;
  */
 public class EchoClientHandle extends SimpleChannelInboundHandler<ByteBuf> {
     private final static Logger LOGGER = LoggerFactory.getLogger(EchoClientHandle.class);
-    private static final ByteBuf HEART_BEAT = Unpooled.unreleasableBuffer(Unpooled.copiedBuffer(new CustomProtocol("123456", "ping").toString(), CharsetUtil.UTF_8));
+    private static final ByteBuf HEART_BEAT = Unpooled.unreleasableBuffer(Unpooled.copiedBuffer(new CustomProtocol("12345", "pings").toString(), CharsetUtil.UTF_8));
 
     @Override
     protected void channelRead0(ChannelHandlerContext channelHandlerContext, ByteBuf byteBuf) throws Exception {
@@ -33,7 +33,7 @@ public class EchoClientHandle extends SimpleChannelInboundHandler<ByteBuf> {
         if (evt instanceof IdleStateEvent) {
             IdleStateEvent idleStateEvent = (IdleStateEvent) evt;
             if (idleStateEvent.state() == IdleState.WRITER_IDLE) {
-                LOGGER.info("已经10秒没有发送消息了");
+                LOGGER.info("已经15秒没有发送消息了");
                 ctx.writeAndFlush(HEART_BEAT).addListener(ChannelFutureListener.CLOSE_ON_FAILURE);
             }
         }

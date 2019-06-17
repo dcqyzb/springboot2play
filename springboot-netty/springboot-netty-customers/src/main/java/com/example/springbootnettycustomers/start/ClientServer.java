@@ -1,21 +1,15 @@
-package com.example.springbootnettycustomer.start;
+package com.example.springbootnettycustomers.start;
 
-import com.example.springbootnettycustomer.Common;
-import com.example.springbootnettycustomer.handel.ClientChannelInitializer;
+import com.example.springbootnettycustomers.handel.ClientChannelInitializer;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelOption;
-import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Service;
-
-import java.net.InetSocketAddress;
 
 /**
  * @author Mr.Deng
@@ -27,13 +21,18 @@ public class ClientServer {
 
     private static final Logger log = Logger.getLogger(ClientServer.class);
 
+    @Value("${netty.host}")
+    private String host;
+    @Value("${netty.port}")
+    private Integer port;
+
     public void sendMessage(String message) throws InterruptedException {
         Bootstrap bootstrap = new Bootstrap();
         bootstrap.group(new NioEventLoopGroup());
         bootstrap.channel(NioSocketChannel.class);
         bootstrap.option(ChannelOption.SO_KEEPALIVE, true);
         bootstrap.handler(new ClientChannelInitializer());
-        ChannelFuture future = bootstrap.connect(Common.HOST, Common.PORT).sync();
+        ChannelFuture future = bootstrap.connect(host, port).sync();
         if (future.isSuccess()) {
             log.info("启动 Netty 成功");
         }

@@ -1,8 +1,15 @@
 package com.example.springbootnettyserver.netty.handel;
 
+import com.example.springbootnettyserver.netty.Common;
 import com.example.springbootnettyserver.netty.cache.ChannelRepository;
+import com.example.springbootnettyserver.netty.start.NettyStartServer;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
+import io.netty.channel.EventLoop;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.net.InetSocketAddress;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author Mr.Deng
@@ -12,6 +19,8 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
 public class ServerHandler extends ChannelInboundHandlerAdapter {
 
     private ChannelRepository channelRepository = new ChannelRepository();
+    @Autowired
+    private NettyStartServer nettyStartServer;
 
     @Override
     public void channelRegistered(ChannelHandlerContext ctx) throws Exception {
@@ -32,7 +41,7 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
         System.out.println(socketAddress);
         ctx.fireChannelActive();
         //远程地址
-        channelRepository.put(socketAddress, ctx.channel());
+//        channelRepository.put(socketAddress, ctx.channel());
         ctx.writeAndFlush("Your channel key is" + socketAddress + "\n\r");
 //        super.channelActive(ctx);
     }
@@ -41,9 +50,8 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
     public void channelInactive(ChannelHandlerContext ctx) throws Exception {
         System.out.println("channelInactive ---》客户端与服务端断开连接之后");
         String s = ctx.channel().remoteAddress().toString();
-        channelRepository.remove(s);
         ctx.writeAndFlush("Your channel key is" + s + "remove \n\r");
-//        super.channelInactive(ctx);
+        super.channelInactive(ctx);
     }
 
     @Override
@@ -59,8 +67,6 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
     public void channelReadComplete(ChannelHandlerContext ctx) throws Exception {
         System.out.println("channel读取数据完毕");
         System.out.println("在线数：" + channelRepository.size());
-//        ctx.writeAndFlush(Unpooled.EMPTY_BUFFER)
-//                .addListener(ChannelFutureListener.CLOSE);
         super.channelReadComplete(ctx);
     }
 

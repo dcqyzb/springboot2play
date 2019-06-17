@@ -18,6 +18,7 @@
         <module>springboot-netty-server</module>
         <module>springboot-netty-customer</module>
         <module>springboot-netty-common</module>
+        <module>springboot-netty-customers</module>
     </modules>
 
     <dependencies>

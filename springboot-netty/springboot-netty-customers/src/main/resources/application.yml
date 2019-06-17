@@ -1,0 +1,13 @@
+server:
+  port: 8886
+
+spring:
+  application:
+    name: springboot-netty-customers
+
+
+netty:
+  host: 169.254.197.92
+  port: 7000
+channel:
+  id: 12345

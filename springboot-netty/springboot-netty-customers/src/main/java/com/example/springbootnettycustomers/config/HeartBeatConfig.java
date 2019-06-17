@@ -1,8 +1,7 @@
-package com.example.springbootnettycustomer.config;
+package com.example.springbootnettycustomers.config;
 
 import com.example.Protocol.CustomProtocol;
-import com.example.springbootnettycustomer.Common;
-import org.springframework.beans.factory.annotation.Value;
+import com.example.springbootnettycustomers.Common;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -13,6 +12,7 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 public class HeartBeatConfig {
+
     @Bean(value = "heartBeat")
     public CustomProtocol heartBeat() {
         return new CustomProtocol(Common.Channel_id, "ping");

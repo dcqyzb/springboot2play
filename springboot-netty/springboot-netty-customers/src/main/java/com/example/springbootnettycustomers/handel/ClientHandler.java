@@ -1,6 +1,6 @@
-package com.example.springbootnettycustomer.handel;
+package com.example.springbootnettycustomers.handel;
 
-import com.example.springbootnettycustomer.start.ClientServer;
+import com.example.springbootnettycustomers.start.ClientServer;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.channel.EventLoop;
@@ -14,6 +14,7 @@ import java.util.concurrent.TimeUnit;
  * @date 2019/6/4 17:07
  */
 public class ClientHandler extends ChannelInboundHandlerAdapter {
+
     @Autowired
     private ClientServer clientServer;
 
@@ -48,13 +49,13 @@ public class ClientHandler extends ChannelInboundHandlerAdapter {
             @Override
             public void run() {
                 try {
-                    clientServer.sendMessage("我在重连2");
+                    clientServer.sendMessage("我在重连1");
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
         }, 1L, TimeUnit.SECONDS);
-        super.channelInactive(ctx);
+//        super.channelInactive(ctx);
     }
 
     @Override
@@ -103,5 +104,4 @@ public class ClientHandler extends ChannelInboundHandlerAdapter {
         System.out.println("助手类移除");
         super.handlerRemoved(ctx);
     }
-
 }
