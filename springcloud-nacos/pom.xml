@@ -12,6 +12,7 @@
     <groupId>com.example</groupId>
     <artifactId>springcloud-nacos</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
     <name>springcloud-nacos-discovery</name>
     <description>Demo project for Spring Boot</description>
 
@@ -19,10 +20,6 @@
         <module>springcloud-nacos-discovery-server</module>
         <module>springcloud-nacos-customer-server</module>
     </modules>
-
-    <properties>
-        <java.version>1.8</java.version>
-    </properties>
 
     <build>
         <plugins>
