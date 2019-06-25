@@ -25,7 +25,6 @@
         <module>springcloud-nacos</module>
         <module>springboot-common</module>
         <module>springboot-rabbitmq</module>
-        <module>springboot-dubbo</module>
     </modules>
 
     <properties>

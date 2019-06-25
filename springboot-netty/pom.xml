@@ -17,6 +17,7 @@
     <modules>
         <module>springboot-netty-server</module>
         <module>springboot-netty-customer</module>
+        <module>springboot-netty-customers</module>
         <module>springboot-netty-common</module>
     </modules>
 
