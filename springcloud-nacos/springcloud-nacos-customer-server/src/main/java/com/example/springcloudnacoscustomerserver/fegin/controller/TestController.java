@@ -18,7 +18,7 @@ public class TestController {
     private ITest iTest;
 
     @GetMapping("/eCho/{ss}")
-    public String eCho(@PathVariable String ss) {
+    public String eCho(@PathVariable(value = "ss") String ss) {
         return iTest.echo(ss);
     }
 

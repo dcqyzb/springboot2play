@@ -6,28 +6,22 @@
         <groupId>com.example</groupId>
         <artifactId>springboot2play</artifactId>
         <version>0.0.1-SNAPSHOT</version>
-        <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
-    <groupId>com.example</groupId>
-    <artifactId>springcloud-nacos</artifactId>
+    <artifactId>springboot-dubbo</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
-    <name>springcloud-nacos-discovery</name>
+    <name>srpingboot-dubbo</name>
     <description>Demo project for Spring Boot</description>
 
-    <modules>
-        <module>springcloud-nacos-discovery-server</module>
-        <module>springcloud-nacos-customer-server</module>
-    </modules>
+    <properties>
+        <dubbo-spring-boot>1.0.0</dubbo-spring-boot>
+    </properties>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
+    <modules>
+        <module>springboot-dubbo-api</module>
+        <module>springboot-dubbo-consumer</module>
+        <module>springboot-dubbo-provider</module>
+    </modules>
 
 </project>
