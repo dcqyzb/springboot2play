@@ -1,0 +1,10 @@
+server:
+  port: 7001
+
+spring:
+  dubbo:
+    application:
+      name: springboot-dubbo-consumer
+    registry:
+      address: zookeeper://192.168.20.224:2181
+    scan: com.example.consumer.controller
