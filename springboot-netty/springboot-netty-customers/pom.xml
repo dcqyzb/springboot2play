@@ -8,12 +8,10 @@
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>springboot-netty-server</artifactId>
+    <artifactId>springboot-netty-customers</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>jar</packaging>
-    <name>springboot-netty-server</name>
+    <name>springboot-netty-customers</name>
     <description>Demo project for Spring Boot</description>
-
 
     <dependencies>
         <dependency>

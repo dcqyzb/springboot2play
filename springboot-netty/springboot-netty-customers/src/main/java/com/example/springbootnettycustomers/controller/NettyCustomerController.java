@@ -1,7 +1,6 @@
-package com.example.springbootnettycustomer.controller;
+package com.example.springbootnettycustomers.controller;
 
-import com.alibaba.fastjson.JSONObject;
-import com.example.springbootnettycustomer.start.ClientServer;
+import com.example.springbootnettycustomers.start.ClientServer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

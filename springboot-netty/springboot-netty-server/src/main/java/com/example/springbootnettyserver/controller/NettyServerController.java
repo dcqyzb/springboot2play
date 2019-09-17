@@ -1,10 +1,17 @@
 package com.example.springbootnettyserver.controller;
 
-import com.example.springbootnettyserver.netty.start.ServerToClientService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import com.example.Protocol.CustomProtocol;
+import com.example.springbootnettyserver.netty.cache.ChannelRepository;
+import io.netty.channel.Channel;
+import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.ChannelId;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Map;
+import java.util.Set;
 
 /**
  * @author Mr.Deng
@@ -14,12 +21,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class NettyServerController {
 
-    @Autowired
-    private ServerToClientService serverToClientService;
-
-    @GetMapping("/serverSend/{message}")
-    public void serverSend(@PathVariable String message) throws Exception {
-        serverToClientService.sendMessage(message);
+    @RequestMapping("/sendAll")
+    public String sendAll(String message) {
+        return message + "成功";
     }
-
 }

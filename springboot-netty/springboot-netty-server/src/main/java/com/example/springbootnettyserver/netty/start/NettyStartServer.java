@@ -7,7 +7,8 @@ import io.netty.channel.ChannelOption;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import java.net.InetSocketAddress;
@@ -20,7 +21,7 @@ import java.net.InetSocketAddress;
 @Component
 public class NettyStartServer {
 
-    private static final Logger LOGGER = Logger.getLogger(NettyStartServer.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(NettyStartServer.class);
 
     public void start(InetSocketAddress address) {
         EventLoopGroup boosGroup = new NioEventLoopGroup(1);
@@ -32,11 +33,11 @@ public class NettyStartServer {
                     .localAddress(address)
                     .childHandler(new ServerChannelInitializer())
                     .option(ChannelOption.SO_BACKLOG, 128)
+                    //保持长连接
                     .childOption(ChannelOption.SO_KEEPALIVE, true);
             //绑定端口，开始接收进来的连接
             ChannelFuture future = bootstrap.bind(address).sync();
             LOGGER.info("server start listen at " + address.getPort());
-            System.out.println("server start listen at " + address.getPort());
             future.channel().closeFuture().sync();
         } catch (InterruptedException e) {
             e.printStackTrace();

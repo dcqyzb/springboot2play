@@ -1,5 +1,7 @@
 package com.example.springbootnettyserver.netty.start;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
@@ -14,6 +16,7 @@ import java.net.InetSocketAddress;
  */
 @Configuration
 public class StartServer implements CommandLineRunner {
+    private static final Logger LOGGER = LoggerFactory.getLogger(StartServer.class);
     @Value("${netty.url}")
     private String url;
     @Value("${netty.port}")
@@ -25,7 +28,7 @@ public class StartServer implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         InetSocketAddress address = new InetSocketAddress(url, port);
-        System.out.println("run........" + url);
+        LOGGER.info("run........" + url);
         server.start(address);
     }
 }
