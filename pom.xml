@@ -25,6 +25,8 @@
         <module>springcloud-nacos</module>
         <module>springboot-common</module>
         <module>springboot-rabbitmq</module>
+        <module>java8learn</module>
+        <module>spring-security-jwt</module>
     </modules>
 
     <properties>
